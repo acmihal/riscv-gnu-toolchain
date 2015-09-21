@@ -853,6 +853,10 @@ const struct riscv_opcode riscv_builtin_opcodes[] =
 {"venqimm1",     "Xhwacha", "s,t", MATCH_VENQIMM1, MASK_VENQIMM1, match_opcode, 0},
 {"venqimm2",     "Xhwacha", "s,t", MATCH_VENQIMM2, MASK_VENQIMM2, match_opcode, 0},
 {"venqcnt",      "Xhwacha", "s,t", MATCH_VENQCNT, MASK_VENQCNT, match_opcode, 0},
+
+/* CAM extension */
+{"caml",         "Xcam", "d,o(s)", MATCH_CAML, MASK_CAML, match_opcode, WR_xd|RD_xs1},
+{"cams",         "Xcam", "t,q(s)", MATCH_CAMS, MASK_CAMS, match_opcode, RD_xs1|RD_xs2},
 };
 
 #define RISCV_NUM_OPCODES \
