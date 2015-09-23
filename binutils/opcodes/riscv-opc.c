@@ -855,8 +855,13 @@ const struct riscv_opcode riscv_builtin_opcodes[] =
 {"venqcnt",      "Xhwacha", "s,t", MATCH_VENQCNT, MASK_VENQCNT, match_opcode, 0},
 
 /* CAM extension */
-{"caml",         "Xcam", "d,o(s)", MATCH_CAML, MASK_CAML, match_opcode, WR_xd|RD_xs1},
-{"cams",         "Xcam", "t,q(s)", MATCH_CAMS, MASK_CAMS, match_opcode, RD_xs1|RD_xs2},
+{"camlk0",       "Xcam", "d,o(s)",    MATCH_CAMLK0, MASK_CAMLK0, match_opcode, WR_xd | RD_xs1         },
+{"camlk1",       "Xcam", "d,o(s)",    MATCH_CAMLK1, MASK_CAMLK1, match_opcode, WR_xd | RD_xs1         },
+{"camlv",        "Xcam", "d,o(s)",    MATCH_CAMLV,  MASK_CAMLV,  match_opcode, WR_xd | RD_xs1         },
+{"camsk0",       "Xcam", "t,q(s)",    MATCH_CAMSK0, MASK_CAMSK0, match_opcode,         RD_xs1 | RD_xs2},
+{"camsk1",       "Xcam", "t,q(s)",    MATCH_CAMSK1, MASK_CAMSK1, match_opcode,         RD_xs1 | RD_xs2},
+{"camsv",        "Xcam", "t,q(s)",    MATCH_CAMSV,  MASK_CAMSV,  match_opcode,         RD_xs1 | RD_xs2},
+{"cam",          "Xcam", "d,s,^j(t)", MATCH_CAM,    MASK_CAM,    match_opcode, WR_xd | RD_xs1 | RD_xs2},
 };
 
 #define RISCV_NUM_OPCODES \
