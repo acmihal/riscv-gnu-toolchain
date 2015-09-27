@@ -8,7 +8,7 @@ binutils_version := 2.25
 glibc_version := 2.22
 newlib_version := 1.18.0
 
-DISTDIR ?= /var/cache/distfiles
+DISTDIR ?= $(RISCV)/distfiles
 GNU_MIRROR := http://mirrors.kernel.org/gnu
 gcc_url := $(GNU_MIRROR)/gcc/gcc-$(gcc_version)/gcc-$(gcc_version).tar.gz
 binutils_url := $(GNU_MIRROR)/binutils/binutils-$(binutils_version).tar.gz
@@ -64,9 +64,10 @@ linux:
 endif
 
 $(addprefix src/original-,$(PACKAGES)):
+	mkdir -p $(DISTDIR)
 	mkdir -p src
 	rm -rf $@ $(subst original-,,$@)-*
-	cd src && (cat $(DISTDIR)/$(subst src/original-,,$@)-$($(subst src/original-,,$@)_version).tar.gz || @FETCHER@ $($(subst src/original-,,$@)_url)) | tar zxf -
+	cd src && (cat $(DISTDIR)/$(subst src/original-,,$@)-$($(subst src/original-,,$@)_version).tar.gz || @FETCHER@ $($(subst src/original-,,$@)_url)) | tee $(DISTDIR)/$(subst src/original-,,$@)-$($(subst src/original-,,$@)_version).tar.gz | tar zxf -
 	mv $(subst original-,,$@)-$($(subst src/original-,,$@)_version) $@
 
 $(addprefix src/,$(PACKAGES)): src/%: src/original-%
