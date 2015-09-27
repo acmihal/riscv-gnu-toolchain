@@ -67,7 +67,7 @@ $(addprefix src/original-,$(PACKAGES)):
 	mkdir -p $(DISTDIR)
 	mkdir -p src
 	rm -rf $@ $(subst original-,,$@)-*
-	cd src && (cat $(DISTDIR)/$(subst src/original-,,$@)-$($(subst src/original-,,$@)_version).tar.gz || @FETCHER@ $($(subst src/original-,,$@)_url)) | tee $(DISTDIR)/$(subst src/original-,,$@)-$($(subst src/original-,,$@)_version).tar.gz | tar zxf -
+	cd src && (cat $(DISTDIR)/$(subst src/original-,,$@)-$($(subst src/original-,,$@)_version).tar.gz || (@FETCHER@ $($(subst src/original-,,$@)_url) | tee $(DISTDIR)/$(subst src/original-,,$@)-$($(subst src/original-,,$@)_version).tar.gz )) | tar zxf -
 	mv $(subst original-,,$@)-$($(subst src/original-,,$@)_version) $@
 
 $(addprefix src/,$(PACKAGES)): src/%: src/original-%
